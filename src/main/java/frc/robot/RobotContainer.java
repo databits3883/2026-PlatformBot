@@ -113,7 +113,8 @@ public class RobotContainer
     configureBindings();
     DriverStation.silenceJoystickConnectionWarning(true);
     NamedCommands.registerCommand("test", Commands.print("I EXIST"));
-    
+    //zero gyro
+    Commands.runOnce(drivebase::zeroGyro);
   }
 
   /**
