@@ -4,10 +4,12 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ExampleSubsystem extends SubsystemBase {
+  Spark motor = new Spark (17);
   /** Creates a new ExampleSubsystem. */
   public ExampleSubsystem() {}
 
@@ -44,4 +46,12 @@ public class ExampleSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
+    public void startMotor(){
+      motor.set(1);
+
+    }
+    public void stopMotor(){
+      motor.set(0);
+      
+    }
 }

@@ -20,6 +20,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.RunSpinner;
+import frc.robot.subsystems.SpinnerMotor;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 
@@ -34,10 +36,13 @@ import swervelib.SwerveInputStream;
  */
 public class RobotContainer
 {
+  //Spinner Motor
+  public static SpinnerMotor spinnerMotor =new SpinnerMotor();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   //final         CommandXboxController driverXbox = new CommandXboxController(0);
    final         CommandJoystick driverJoystick = new CommandJoystick(0);
+   
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                                 "swerve/platform"));
@@ -109,6 +114,7 @@ public class RobotContainer
    */
   public RobotContainer()
   {
+ 
     // Configure the trigger bindings
     configureBindings();
     DriverStation.silenceJoystickConnectionWarning(true);
@@ -190,6 +196,7 @@ public class RobotContainer
       //driverXbox.back().whileTrue(Commands.none());
       driverJoystick.button(14).whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverJoystick.button(15).onTrue(Commands.none());
+      driverJoystick.button(16).whileTrue(new RunSpinner());
     }
 
   }

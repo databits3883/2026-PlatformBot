@@ -25,6 +25,9 @@ public final class Constants
   public static final double MAX_SPEED  = Units.feetToMeters(14.5);
   // Maximum speed of the robot in meters per second, used to limit acceleration.
 
+  //The motor id on the spinner motor
+  public static final int SPINNER_MOTOR_ID = 17;
+
 //  public static final class AutonConstants
 //  {
 //
