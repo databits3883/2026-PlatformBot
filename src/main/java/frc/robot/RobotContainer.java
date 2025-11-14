@@ -20,7 +20,9 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.RunActuator;
 import frc.robot.commands.RunSpinner;
+import frc.robot.subsystems.ActuatorMotor;
 import frc.robot.subsystems.SpinnerMotor;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
@@ -38,6 +40,8 @@ public class RobotContainer
 {
   //Spinner Motor
   public static SpinnerMotor spinnerMotor =new SpinnerMotor();
+  public static ActuatorMotor actuatorMotor =new ActuatorMotor();
+  
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   //final         CommandXboxController driverXbox = new CommandXboxController(0);
@@ -197,6 +201,8 @@ public class RobotContainer
       driverJoystick.button(14).whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverJoystick.button(15).onTrue(Commands.none());
       driverJoystick.button(16).whileTrue(new RunSpinner());
+      driverJoystick.povUp().whileTrue(new RunActuator(1));
+      driverJoystick.povDown().whileTrue(new RunActuator(-1));
     }
 
   }

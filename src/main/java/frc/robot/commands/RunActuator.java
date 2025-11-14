@@ -8,18 +8,19 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class RunSpinner extends Command {
+public class RunActuator  extends Command {
+  int direction = 0;
   /** Creates a new runSpinner. */
-  public RunSpinner() {
+  public RunActuator (int direction) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.spinnerMotor);
+    addRequirements(RobotContainer.actuatorMotor);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     //System.out.println("RunSpinnner:init:about to start motor");
-    RobotContainer.spinnerMotor.startMotor();
+    RobotContainer.actuatorMotor.startMotor(direction);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,8 +35,8 @@ public class RunSpinner extends Command {
       //System.out.println("RunSpinnner:end:interrupted was called!");
       //We do not need to do anything special if this gets interrupted early
     }
-    //System.out.println("RunSpinnner:end:about to stop motor");
-    RobotContainer.spinnerMotor.stopMotor();
+    System.out.println("RunActuator:end:about to stop motor");
+    RobotContainer.actuatorMotor.stopMotor();
   }
   
   // Returns true when the command should end.

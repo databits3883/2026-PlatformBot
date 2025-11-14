@@ -27,6 +27,10 @@ public final class Constants
 
   //The motor id on the spinner motor
   public static final int SPINNER_MOTOR_ID = 17;
+  public static final int ACTUATOR_MOTOR_ID = 16;
+
+  //public static final int ACTUATOR_JOYSTICK_UP = 
+  //public static final int ACTUATOR_JOYSTICK_DOWN = 
 
 //  public static final class AutonConstants
 //  {
