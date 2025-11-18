@@ -11,15 +11,16 @@ import frc.robot.RobotContainer;
 public class RunActuator  extends Command {
   int direction = 0;
   /** Creates a new runSpinner. */
-  public RunActuator (int direction) {
+  public RunActuator (int directionInput) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.actuatorMotor);
+    direction = directionInput;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //System.out.println("RunSpinnner:init:about to start motor");
+    System.out.println("RunActuator:init:about to start motor"+direction);
     RobotContainer.actuatorMotor.startMotor(direction);
   }
 
