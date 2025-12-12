@@ -25,7 +25,6 @@ import frc.robot.commands.RunActuatorTime;
 //import frc.robot.commands.RunSpinner;
 //import frc.robot.commands.RunSpinnerTime;
 import frc.robot.subsystems.ActuatorMotor;
-import frc.robot.subsystems.SpinnerMotor;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 
@@ -206,7 +205,7 @@ public class RobotContainer
       driverJoystick.povUp().whileTrue(new RunActuator(Constants.ACTUATOR_MOTOR_UP));
       driverJoystick.povDown().whileTrue(new RunActuator(Constants.ACTUATOR_MOTOR_DOWN));
       driverJoystick.povRight().onTrue(new RunActuatorTime(Constants.ACTUATOR_MOTOR_UP));
-      driverJoystick.povLeft().onTrue(new RunActuatorTime(Constants.ACTUATOR_MOTOR_UP));
+      driverJoystick.povLeft().onTrue(new RunActuatorTime(Constants.ACTUATOR_MOTOR_DOWN));
     }
 
   }

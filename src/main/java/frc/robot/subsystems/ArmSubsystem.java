@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
 public class ArmSubsystem {
-    private final VictorSP armMotor;
-    private final Encoder armEncoder;
+    //private final VictorSP armMotor;
+    //private final Encoder armEncoder;
     //private final ProfiledPIDController armController;
 
     // PID Gains and Motion Profile Constraints
