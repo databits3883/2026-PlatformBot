@@ -21,10 +21,10 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.RunActuator;
-import frc.robot.commands.RunSpinner;
-import frc.robot.commands.RunSpinnerTime;
+import frc.robot.commands.RunActuatorTime;
+//import frc.robot.commands.RunSpinner;
+//import frc.robot.commands.RunSpinnerTime;
 import frc.robot.subsystems.ActuatorMotor;
-import frc.robot.subsystems.SpinnerMotor;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 
@@ -40,7 +40,7 @@ import swervelib.SwerveInputStream;
 public class RobotContainer
 {
   //Spinner Motor
-  public static SpinnerMotor spinnerMotor =new SpinnerMotor();
+  //public static SpinnerMotor spinnerMotor =new SpinnerMotor();
   public static ActuatorMotor actuatorMotor =new ActuatorMotor();
   
 
@@ -201,10 +201,11 @@ public class RobotContainer
       //driverXbox.back().whileTrue(Commands.none());
       driverJoystick.button(14).whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverJoystick.button(15).onTrue(Commands.none());
-      driverJoystick.button(16).whileTrue(new RunSpinner());
-      driverJoystick.povUp().whileTrue(new RunActuator(1));
-      driverJoystick.povDown().whileTrue(new RunActuator(-1));
-      driverJoystick.povRight().onTrue(new RunSpinnerTime(3));
+      //driverJoystick.button(16).whileTrue(new RunSpinner());
+      driverJoystick.povUp().whileTrue(new RunActuator(Constants.ACTUATOR_MOTOR_UP));
+      driverJoystick.povDown().whileTrue(new RunActuator(Constants.ACTUATOR_MOTOR_DOWN));
+      driverJoystick.povRight().onTrue(new RunActuatorTime(Constants.ACTUATOR_MOTOR_UP));
+      driverJoystick.povLeft().onTrue(new RunActuatorTime(Constants.ACTUATOR_MOTOR_DOWN));
     }
 
   }

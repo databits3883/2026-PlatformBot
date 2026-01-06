@@ -5,25 +5,27 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class RunSpinnerTime extends Command {
+public class RunActuatorTime extends Command {
+  int direction = 0;
   int totalSeconds = 0;
   long timeWhenStart = 0;
-  /** Creates a new runSpinner. */
-  public RunSpinnerTime(int secondsToRun) {
+  public RunActuatorTime (int directionInput) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.spinnerMotor);
-    totalSeconds = secondsToRun;
-   
+    addRequirements(RobotContainer.actuatorMotor);
+    direction = directionInput;
+    totalSeconds = Constants.ACTUATOR_RUN_TIME;
   }
+  /** Creates a new runSpinner. */
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     //System.out.println("RunSpinnner:init:about to start motor");
-    RobotContainer.spinnerMotor.startMotor();
+    RobotContainer.actuatorMotor.startMotor(direction);
     timeWhenStart = System.currentTimeMillis();
   }
 
@@ -40,7 +42,7 @@ public class RunSpinnerTime extends Command {
       //We do not need to do anything special if this gets interrupted early
     }
     System.out.println("RunSpinnnerTime:end:about to stop motor");
-    RobotContainer.spinnerMotor.stopMotor();
+    RobotContainer.actuatorMotor.stopMotor();
   }
   
   // Returns true when the command should end.
