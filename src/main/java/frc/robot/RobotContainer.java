@@ -22,9 +22,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.RunActuator;
 import frc.robot.commands.RunActuatorTime;
-//import frc.robot.commands.RunSpinner;
-//import frc.robot.commands.RunSpinnerTime;
+import frc.robot.commands.RunArm;
 import frc.robot.subsystems.ActuatorMotor;
+import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 
@@ -42,6 +42,7 @@ public class RobotContainer
   //Spinner Motor
   //public static SpinnerMotor spinnerMotor =new SpinnerMotor();
   public static ActuatorMotor actuatorMotor =new ActuatorMotor();
+  public static ArmSubsystem armSubsystem = new ArmSubsystem();
   
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -201,7 +202,9 @@ public class RobotContainer
       //driverXbox.back().whileTrue(Commands.none());
       driverJoystick.button(14).whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverJoystick.button(15).onTrue(Commands.none());
-      //driverJoystick.button(16).whileTrue(new RunSpinner());
+      //hard code to run to angle zero
+      driverJoystick.button(16).whileTrue(new RunArm(0));
+      
       driverJoystick.povUp().whileTrue(new RunActuator(Constants.ACTUATOR_MOTOR_UP));
       driverJoystick.povDown().whileTrue(new RunActuator(Constants.ACTUATOR_MOTOR_DOWN));
       driverJoystick.povRight().onTrue(new RunActuatorTime(Constants.ACTUATOR_MOTOR_UP));

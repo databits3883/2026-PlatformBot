@@ -11,9 +11,10 @@ import edu.wpi.first.math.util.Units;
 //import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class ArmSubsystem {
+public class ArmSubsystem extends SubsystemBase {
     //private final VictorSP armMotor;
     //private final Encoder armEncoder;
     //private final ProfiledPIDController armController;
@@ -47,16 +48,28 @@ public class ArmSubsystem {
         armPIDController.reset();
     }
 
-    public void SetAngleSetpoint(double targetAngle)
+    public void setAngleSetpoint(double targetAngle)
     {
         angleSetpoint = Units.degreesToRotations(targetAngle);
     }
     
-    public void SetAngleMotor(double speed)
+    public void setAngleMotor(double speed)
     {
         if (speed > 1) speed = 1;
         else if (speed < -1) speed = -1;
         angleMotor.setVoltage(1 * speed);
+    }
+
+    /**
+     * Stops the motor
+     */
+    public void stop()
+    {
+        //turn off motor
+        setAngleMotor(0);
+        //set the current
+        double currentAngle = Units.rotationsToDegrees(absAngleEncoder.getPosition());
+        setAngleSetpoint(currentAngle);                
     }
     
 
@@ -66,7 +79,7 @@ public class ArmSubsystem {
         double output = armPIDController.calculate(currentAngle);
         //Restrict to 1/4 speed
         output = MathUtil.clamp(output, -0.25, 0.25);
-        SetAngleMotor(output);
+        setAngleMotor(output);
     }
 
     public boolean atSetpoint() {
